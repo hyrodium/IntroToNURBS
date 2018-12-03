@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500pt" height="500pt" viewBox="0 0 500 500" version="1.1">
+<g id="surface173">
+<rect x="0" y="0" width="500" height="500" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
+<path style="fill:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 287 425 C 322.5 432.5 361.25 448.75 384.625 440.375 C 408 432 416 399 417.5 364.25 C 422 260 368 140 270.125 128.75 C 237.5 125 200 133.332031 173.332031 158.890625 C 120 210 110 330 134 380 C 158 430 216 410 287 425 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 102 450 C 102 452.667969 98 452.667969 98 450 C 98 447.332031 102 447.332031 102 450 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 247 400 C 247 402.667969 243 402.667969 243 400 C 243 397.332031 247 397.332031 247 400 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 402 465 C 402 467.667969 398 467.667969 398 465 C 398 462.332031 402 462.332031 402 465 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 442 300 C 442 302.667969 438 302.667969 438 300 C 438 297.332031 442 297.332031 442 300 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 352 100 C 352 102.667969 348 102.667969 348 100 C 348 97.332031 352 97.332031 352 100 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 127 150 C 127 152.667969 123 152.667969 123 150 C 123 147.332031 127 147.332031 127 150 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 102 450 C 102 452.667969 98 452.667969 98 450 C 98 447.332031 102 447.332031 102 450 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 247 400 C 247 402.667969 243 402.667969 243 400 C 243 397.332031 247 397.332031 247 400 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 402 465 C 402 467.667969 398 467.667969 398 465 C 398 462.332031 402 462.332031 402 465 "/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 100 450 L 245 400 L 400 465 L 440 300 L 350 100 L 125 150 L 100 450 L 245 400 L 400 465 "/>
+</g>
+</svg>
