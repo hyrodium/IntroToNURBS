@@ -234,7 +234,7 @@ NURBSは「物体の形状表現」という工学への応用が重視される
     \hspace{5.2mm} \= \hspace{35mm} \= \hspace{1000mm} \kill
     \> \labelitemi \, $f:A\to B;a\mapsto b$ \> 写像$f$の始域と終域, 元の対応を表す. \\
     \> \labelitemi \, $\setN$ \> 自然数全体の集合. $\setN$は$0$を含むとする. \\
-    \> \labelitemi \, $\Z{i}{j}$ \> $i$から$j$までの整数の集合. $\Set{i,i+1,\dots,j-1,j}=\Squa{i,j}\cap\setZ$ \\
+    \> \labelitemi \, $\Z{i}{j}$ \> $i$から$j$までの整数の集合. $\Z{i}{j}=\Set{i,i+1,\dots,j-1,j}=\Squa{i,j}\cap\setZ$. \\
     \> \labelitemi \, $\#S$ \> 集合$S$の元の個数. 本文章では有限集合に対してのみこの記号を使う. \\
     \> \labelitemi \, $C^{r}(U)$ \> $U$上の関数のうち, $r$階導関数が連続なもの全体の集合. $C^0$は単に連続関数. \\
     \> \labelitemi \, $A\subset B$ \> 集合$A,B$の包含関係. 真部分集合とは限らない. \\
@@ -251,7 +251,7 @@ NURBSは「物体の形状表現」という工学への応用が重視される
 % \section{B\'{e}zier曲線}
 \section{Bernstein基底関数とB\'{e}zier曲線}
 NURBSの理解のためには, Bernstein基底関数とB\'{e}zier曲線から導入するのが適切であろう.
-NURBS基底関数は, 後の有理基底関数やB-spline基底関数, 多重基底関数を寄せ集めたものであり, これらの基底関数はBernstein基底関数の一般化であるためである.
+NURBS基底関数は, 後述の有理基底関数やB-spline基底関数, 多重基底関数を合わせたものであり, これらの基底関数はそれぞれBernstein基底関数の一般化としての性質を持つためである.
 % Bernstein基底関数は次で定義される.
 \begin{screen}
 	\begin{defn}
@@ -290,7 +290,7 @@ NURBS基底関数は, 後の有理基底関数やB-spline基底関数, 多重基
         ここで$B_{(i,p)}$は$p$次Bernstein基底関数であり, $\bm{a}_i$は制御点と呼ばれる.
 	\end{defn}
 \end{screen}
-次の図\ref{Fig101}に$p\le 4$までのB\'ezier曲線の例を示す.\footnote{$p=0$では1点しか現れないが, これもB\'{e}zier曲線に含めるとする.}
+次の図\ref{Fig101}に$p\le 4$までのB\'ezier曲線の例を示す.\footnote{(単に定義の問題なのでどちらでも良いのだが)1点しか現れない$p=0$でもB\'{e}zier曲線に含めるとする.}
 \newpage
 
 \addtocounter{footnote}{-1}
@@ -302,7 +302,7 @@ NURBS基底関数は, 後の有理基底関数やB-spline基底関数, 多重基
 	\label{Fig101}
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/rkvbtzpipd}}
-Bernstein基底関数について次の帰納的な定理が成り立つ.
+Bernstein基底関数について次の帰納的な性質が成り立つ.
 \begin{screen}
 	\begin{thm}
 		\label{Thm101}
@@ -423,7 +423,7 @@ B\'ezier曲線について次の定理が成り立つ.
 \noindent
 式(\ref{Eqn102})と式(\ref{Eqn105})が等価であることから, B\'ezier曲線の定義を式(\ref{Eqn105})とする流儀もある.
 
-以降のための準備として, 次に多項式空間を定義する.
+以降のための準備として, 次に多項式空間を用意する.
 \begin{screen}
 	\begin{defn}
 		多項式空間
@@ -511,18 +511,19 @@ $1$の分割とは, 定数関数$1$を, 幾つかの非負値関数の和に分�
 \begin{screen}
 	\begin{thm}
 		\label{affine}
-		Affine不変性
+		アフィン不変性\footnotemark
 
 		$1$の分割を充たす基底関数$B_i$とそれに対応する制御点を$\bm{a}_i$とする.
 		また, これらから生成される曲線を$\displaystyle\bm{p}(\bm{a}_i;t):=\sum_i B_i(t)\bm{a}_i$とする.
-		このとき, 任意のAffine変換$T$に対して次が成立する.
+		このとき, 任意のアフィン変換$T$に対して次が成立する.
 		\begin{align}
 			T(\bm{p}(\bm{a}_i;t))=\bm{p}(T(\bm{a}_i);t)
 		\end{align}
 	\end{thm}
 \end{screen}
+\footnotetext{affine invarianceの訳から習慣的に「アフィン不変性」と呼ばれているが, 「アフィン可換性」と呼ぶ方が定理をよく表しているように筆者は思う.}
 \begin{proof}
-	任意のAffine変換$T$は行列$A$による線形変換とベクトル$\bm{b}$の合成で表されるから
+	任意のアフィン変換$T$は行列$A$による線形変換とベクトル$\bm{b}$による平行移動の合成で書けるから
 	\begin{align}
 		\bm{p}(T(\bm{a}_i);t)
 		=\sum_iB_i(A\bm{a}_i+\bm{b})
@@ -532,17 +533,17 @@ $1$の分割とは, 定数関数$1$を, 幾つかの非負値関数の和に分�
 	\end{align}
 	である.
 \end{proof}
-次の図\ref{Fig130}は$5$次B\'{e}zier曲線に対するAffine不変性の例を示している.
+次の図\ref{Fig130}は$5$次B\'{e}zier曲線に対するアフィン不変性の例を示している.
 \begin{figure}[htbp]
 	\centering
     \includegraphics[page=13,clip,width=135mm]{fig.pdf}
     % \includegraphics[page=1,clip,width=100mm]{fig.pdf}
-	\caption{Affine不変性の例}
+	\caption{アフィン不変性の例}
 	\label{Fig130}
 \end{figure}
 
 \noindent
-Affine不変性は, 「制御点を平行移動や拡大縮小\footnote{Affine変換なので, 定理はより一般の変換での成立を主張している.}すれば曲線もそれに追従する」ことを意味しており, これは人間が制御点を直観的に決定することを容易にしている.
+アフィン不変性は, 「制御点を平行移動や拡大縮小\footnote{アフィン変換なので, 定理はより一般の変換での成立を主張している.}すれば曲線もそれに追従する」ことを意味しており, これは人間が制御点を直観的に決定することを容易にしている.
 次の凸包性に関する性質は, 生成される図形の位置が制御点から見積もれることを主張しており, この性質も人間にとって都合が良い.
 \begin{screen}
 	\begin{thm}
@@ -638,7 +639,7 @@ B\'ezier曲線では, 楕円や双曲線を表現できないという問題が�
 		\end{align}
 	\end{defn}
 \end{screen}
-定理\ref{Thm201}より1の分割が充たされるから, 有理曲線もまたAffine不変性(定理\ref{affine})や凸包性(定理\ref{convex})を充たす.
+定理\ref{Thm201}より1の分割が充たされるから, 有理曲線もまたアフィン不変性(定理\ref{affine})や凸包性(定理\ref{convex})を充たす.
 
 
 \newpage
@@ -680,7 +681,7 @@ $\tilde{d}=2$では可視化するために必要な空間が3次元だから理
 
 \newpage
 有理B\'ezier曲線で円弧を表現するには, 図\ref{Fig202}のようにB\'ezier曲線で$\mathbb{R}^3$上の円錐に沿って放物線を作り, それを原点に関して射影すれば良い.%
-\footnote{これによって写像$\mathbb{R}\to S^1$が得られるが, この写像は立体射影と本質的に同じである.}
+\footnote{これによって写像$\mathbb{R}\to S^1$が得られるが, この写像は立体射影と本質的に同じパラメータ付けである.}
 \addtocounter{footnote}{-1}
 \begin{figure}[htbp]
 	\centering
@@ -811,7 +812,7 @@ B\'ezier曲線, 有理曲線と同じように, 制御点$\bm{a}_i$に対応す�
 
 \noindent
 % 定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\supp(B_{(i,p-1)}), \supp(B_{(i+1,p-1)})$\footnotemark 上での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
-定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\supp(B_{(i,p-1)}), \supp(B_{(i+1,p-1)})$上での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
+定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\squa{k_{i},k_{i+p}}=\supp(B_{(i,p-1)}), \squa{k_{i+1},k_{i+p+1}}=\supp(B_{(i+1,p-1)})$上(定理\ref{Thm301}参照)での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
 (定理\ref{Thm301}参照.)
 % \footnotetext{ある関数$f:S\to \setR$に対して$\supp(f)\subset S$を$f$の台といい, $\supp(f)=\overline{\set{x\mid f(x)\neq 0}}$で定義される.}
 $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のようになる.
@@ -865,7 +866,7 @@ $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のよ
 		\label{Thm302}
 		B-spline基底関数の局所依存性
 
-		$B_{(i,p)}|_{[k_j,k_{j+1}]}$はノット列の部分列$ \pare{k_{j-p+1}, \dots ,k_{j+p}} $のみによって決定され, これは$ i $に依らない.
+		$B_{(i,p)}|_{[k_j,k_{j+1}]}$はノット列の部分列$ \pare{k_{j-p+1}, \dots ,k_{j+p}} $のみによって決定される.
 	\end{thm}
 \end{screen}
 \begin{proof}
