@@ -813,7 +813,6 @@ B\'ezier曲線, 有理曲線と同じように, 制御点$\bm{a}_i$に対応す�
 \noindent
 % 定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\supp(B_{(i,p-1)}), \supp(B_{(i+1,p-1)})$\footnotemark 上での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
 定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\squa{k_{i},k_{i+p}}=\supp(B_{(i,p-1)}), \squa{k_{i+1},k_{i+p+1}}=\supp(B_{(i+1,p-1)})$上(定理\ref{Thm301}参照)での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
-(定理\ref{Thm301}参照.)
 % \footnotetext{ある関数$f:S\to \setR$に対して$\supp(f)\subset S$を$f$の台といい, $\supp(f)=\overline{\set{x\mid f(x)\neq 0}}$で定義される.}
 $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のようになる.
 \addtocounter{footnote}{-1}
@@ -1228,7 +1227,9 @@ $B_{(i,p)}$と$C_{(i,p)}$にはそれぞれに良い性質があり, $C_{(i,p)}$
 	区間$(k_j,k_{j+1})\subset(k_{p+1},k_{l-p})$で考える.
 	定理\ref{Thm301}より
 	\begin{align}
-		\sum_iB_{(i,p)}=\sum_{i\in\set{j-p,\dots,j}}B_{(i,p)}\quad (t\in(k_j,k_{j+1}))
+		\sum_iB_{(i,p)}(t)
+        =\sum_{i\in\set{j-p,\dots,j}}B_{(i,p)}(t)
+        \quad (t\in(k_j,k_{j+1}))
 	\end{align}
 	である.
 	帰納法で示す.
@@ -1522,7 +1523,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 				\begin{array}{c}
 					f|_{\mathbb{R}\backslash[k_1,k_l)}=0, \\
 					\A i\in\Z{1}{l-1}, \E g\in \mathcal{P}[p], f|_{[k_{i},k_{i+1})}=g|_{[k_{i},k_{i+1})}, \\
-					\A t\in\setR, \E \varepsilon>0, f|_{(t^*-\varepsilon,t^*+\varepsilon)}\in C^{p-\N(t^*)}
+					\A t\in\setR, \E \varepsilon>0, f|_{(t-\varepsilon,t+\varepsilon)}\in C^{p-\N(t)}
 				\end{array}
 			}
 		\end{align}
@@ -1690,7 +1691,7 @@ NURBSとは, Non-Uniform Rational B-splineの略である.
 Non-Uniformはノット列が等間隔とは限らない事を, Rationalは有理基底関数をそれぞれ意味している.
 B-splineは先に説明した通りである.
 以上を組み合わせたものがNURBSであるから, この節では特に新しい概念は登場しない.
-既出の定義/定理を用いてNURBS基底関数, NURBS写像, NURBS多様体の構成を行う.
+既出の定義/定理を用いてNURBS基底関数, NURBS多様体の構成を行う.
 
 \begin{screen}
 	\begin{defn}
