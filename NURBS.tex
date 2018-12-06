@@ -8,6 +8,7 @@
 \usepackage{comment}
 \usepackage{mathrsfs}
 \usepackage{longtable}
+\usepackage{here}
 \usepackage{hhline}
 \usepackage{ascmac}
 \usepackage{braket}
@@ -148,9 +149,9 @@
 \begin{document}
 \maketitle
 \vspace{2em}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
-    \includegraphics[width=160mm]{Sample21.png}
+    \includegraphics[width=160mm]{cover.png}
 \end{figure}
 
 \thispagestyle{empty}
@@ -268,7 +269,7 @@ NURBS基底関数は, 後述の有理基底関数やB-spline基底関数, 多重
 \end{screen}
 次の図\ref{Fig104}に$p\le 4$までのBernstein基底関数の例を示す.\footnote{図の曲線の色は$i=1$から順に赤, 橙, $\dots$ としており, 後の図\ref{Fig102}などと同様である.}
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=10,clip,width=160mm]{fig.pdf}
     % \includegraphics[page=1,clip,width=100mm]{fig.pdf}
@@ -276,8 +277,7 @@ NURBS基底関数は, 後述の有理基底関数やB-spline基底関数, 多重
 	\label{Fig104}
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/yc2qe6j6re}}
-
-\noindent B\'{e}zier曲線はBernstein基底関数と制御点の線形結合によって定義される.
+B\'{e}zier曲線はBernstein基底関数と制御点の線形結合によって定義される.
 \begin{screen}
 	\begin{defn}
 		B\'ezier曲線
@@ -294,7 +294,7 @@ NURBS基底関数は, 後述の有理基底関数やB-spline基底関数, 多重
 \newpage
 
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=1,clip,width=160mm]{fig.pdf}
     % \includegraphics[page=1,clip,width=100mm]{fig.pdf}
@@ -340,16 +340,12 @@ Bernstein基底関数について次の帰納的な性質が成り立つ.
 定義\ref{Def101}の代わりに, 定理\ref{Thm101}を以ってBernstein基底関数の定義とする流儀もある.
 この流儀は, 後のB-spline基底関数の定義で役立つ.
 $p\le 3$までの帰納的関係を表したものが次の図\ref{Fig102}である.\footnote{特に主張の無い図に見えるかもしれないが, 後の図\ref{Fig301}と見比べれるのに役立つ.}
-
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=2,clip,width=80mm]{fig.pdf}
 	\caption{Bernstein基底関数の帰納的関係}
 	\label{Fig102}
 \end{figure}
-
-
-\newpage
 B\'ezier曲線について次の定理が成り立つ.
 \begin{screen}
 	\begin{thm}
@@ -412,15 +408,13 @@ B\'ezier曲線について次の定理が成り立つ.
 %\newpage
 定理\ref{Thm105}を図で表すと, 例えば$p=3$では図\ref{Fig103}のようになる.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=3,clip,width=110mm]{fig.pdf}
 	\caption{3次B\'ezier曲線(赤線)\protect\footnotemark}
 	\label{Fig103}
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/rnbuksh1w3}}
-
-\noindent
 式(\ref{Eqn102})と式(\ref{Eqn105})が等価であることから, B\'ezier曲線の定義を式(\ref{Eqn105})とする流儀もある.
 
 以降のための準備として, 次に多項式空間を用意する.
@@ -534,15 +528,13 @@ $1$の分割とは, 定数関数$1$を, 幾つかの非負値関数の和に分�
 	である.
 \end{proof}
 次の図\ref{Fig130}は$5$次B\'{e}zier曲線に対するアフィン不変性の例を示している.
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=13,clip,width=135mm]{fig.pdf}
     % \includegraphics[page=1,clip,width=100mm]{fig.pdf}
 	\caption{アフィン不変性の例}
 	\label{Fig130}
 \end{figure}
-
-\noindent
 アフィン不変性は, 「制御点を平行移動や拡大縮小\footnote{アフィン変換なので, 定理はより一般の変換での成立を主張している.}すれば曲線もそれに追従する」ことを意味しており, これは人間が制御点を直観的に決定することを容易にしている.
 次の凸包性に関する性質は, 生成される図形の位置が制御点から見積もれることを主張しており, この性質も人間にとって都合が良い.
 \begin{screen}
@@ -577,7 +569,7 @@ $1$の分割とは, 定数関数$1$を, 幾つかの非負値関数の和に分�
 	\end{proof}
 }
 次の図\ref{Fig131}は$5$次B\'{e}zier曲線に対する凸包性の例を示している.
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=14,clip,width=85mm]{fig.pdf}
     % \includegraphics[page=1,clip,width=100mm]{fig.pdf}
@@ -669,13 +661,12 @@ B\'ezier曲線では, 楕円や双曲線を表現できないという問題が�
 
 % \newpage
 この定理を図で表すと次の図\ref{Fig201}のようになる.
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=4,clip,width=120mm]{fig.pdf}
 	\caption{曲線の射影}
 	\label{Fig201}
 \end{figure}
-
 \noindent
 $\tilde{d}=2$では可視化するために必要な空間が3次元だから理解しやすいが, $\tilde{d}=3$となると$4$次元空間からの射影が必要となり, 幾何的にイメージするのは少し難しくなる.
 
@@ -683,7 +674,7 @@ $\tilde{d}=2$では可視化するために必要な空間が3次元だから理
 有理B\'ezier曲線で円弧を表現するには, 図\ref{Fig202}のようにB\'ezier曲線で$\mathbb{R}^3$上の円錐に沿って放物線を作り, それを原点に関して射影すれば良い.%
 \footnote{これによって写像$\mathbb{R}\to S^1$が得られるが, この写像は立体射影と本質的に同じパラメータ付けである.}
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=5,clip,width=160mm]{fig.pdf}
 	\caption{有理B\'ezier曲線による円弧の表現\protect \footnotemark}
@@ -737,7 +728,7 @@ $\tilde{d}=2$では可視化するために必要な空間が3次元だから理
 ここで, 簡単のために$w_0=w_1=w_3=w_4=w_5=1$とし, $w_2$をパラメータとした.
 図中の色付きの曲線が有理Bernstein基底関数$B_2$である.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=6,clip,width=160mm]{fig.pdf}
 	\caption{有理Bernstein基底関数\protect \footnotemark}
@@ -748,7 +739,7 @@ $\tilde{d}=2$では可視化するために必要な空間が3次元だから理
 \noindent
 図\ref{Fig212}に示したこれらの基底関数から生成される有理B\'ezier曲線は, それぞれ次の図\ref{Fig213}のような曲線を描く.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=7,clip,width=130mm]{fig.pdf}
 	\caption{有理B\'ezier曲線 \protect\footnotemark}
@@ -803,20 +794,19 @@ B\'ezier曲線, 有理曲線と同じように, 制御点$\bm{a}_i$に対応す�
 	\end{defn}
 \end{screen}
 次の図\ref{Fig301}は$n=7$とした際の$p\leq 3$までの基底関数の帰納的定義の関係を表したものである.
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=8,clip,width=75mm]{fig.pdf}
 	\caption{B-Spline基底関数の帰納的定義}
 	\label{Fig301}
 \end{figure}
-
 \noindent
 % 定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\supp(B_{(i,p-1)}), \supp(B_{(i+1,p-1)})$\footnotemark 上での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
 定義式\eqref{Eqn301}の右辺の$B_{(i,p-1)},B_{(i+1,p-1)}$の係数は, それぞれ区間$\squa{k_{i},k_{i+p}}=\supp(B_{(i,p-1)}), \squa{k_{i+1},k_{i+p+1}}=\supp(B_{(i+1,p-1)})$上(定理\ref{Thm301}参照)での1次関数であり, この区間上で$0$から$1$まで(或いは$1$から$0$まで)変化する.
 % \footnotetext{ある関数$f:S\to \setR$に対して$\supp(f)\subset S$を$f$の台といい, $\supp(f)=\overline{\set{x\mid f(x)\neq 0}}$で定義される.}
 $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のようになる.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     % \includegraphics[page=9,clip,width=115mm]{fig.pdf}
     \includegraphics[page=9,clip,width=111mm]{fig.pdf}
@@ -832,15 +822,16 @@ $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のよ
 		\label{Thm301}
 		B-spline基底関数の台
 
-		$k_{i}\neq k_{i+p+1}$であれば
+		ノット列$\bm{k}=(k_1,\dots,k_l)$から生成されるB-spline基底関数$B_{(i,p)}$について
 		\begin{align}
-			\supp(B_{(i,p)})=[k_{i}, k_{i+p+1}]
+			\supp(B_{(i,p)})=\Cl{(k_{i}, k_{i+p+1})}
 		\end{align}
-		である.
+		が成り立つ.
 	\end{thm}
 \end{screen}
 \begin{proof}
-	B-spline基底関数の定義式(\ref{Eqn301}), (\ref{Eqn302}) (及び図\ref{Fig301})より, 明らかに$t\not\in[k_{i}, k_{i+p+1}]$において$B_{(i,p)}(t)=0$である.
+    $k_{i}=k_{i+p+1}$であれば明らかなので, 以降では$k_{i}\neq k_{i+p+1}$を仮定する.
+	B-spline基底関数の定義式(\ref{Eqn301}), (\ref{Eqn302}) (及び図\ref{Fig301})より, $t\not\in[k_{i}, k_{i+p+1}]$において$B_{(i,p)}(t)=0$である.
 	よって
 	\begin{align}
 		\supp(B_{(i,p)})\subset[k_{i}, k_{i+p+1}]
@@ -849,12 +840,13 @@ $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のよ
 	更にB-spline基底関数の定義より, $k_l\neq k_{l+1} \ (l=i,\dots,i+p)$であれば各開区間$(k_{l}, k_{l+1})$においては$B_{(i,p)}> 0$あり, $\supp(B_{(i,p)})\supset[k_l, k_{l+1}]$である.
 	よって$k_{i}\neq k_{i+p+1}$であれば
 	\begin{align}
-		\supp(B_{(i,p)})\supset[k_{i}, k_{i+1}]\cup\dots\cup[k_{i+p-1}, k_{i+p+1}]=[k_{i}, k_{i+p+1}]
+		\supp(B_{(i,p)})
+        \supset\bigcup_{j\in \Z{i}{i+p}, \ k_{j}\neq k_{j+1}}[k_{j}, k_{j+1}]=[k_{i}, k_{i+p+1}]
 	\end{align}
 	である.
 	よって
 	\begin{align}
-		\supp(B_{(i,p)})=[k_{i}, k_{i+p+1}]
+		\supp(B_{(i,p)})=[k_{i}, k_{i+p+1}]=\Cl{(k_{i}, k_{i+p+1})}
 	\end{align}
 	である.
 \end{proof}
@@ -863,20 +855,26 @@ $p\leq 3$までの基底関数$B_{(i,p)}$は例えば次の図\ref{Fig302}のよ
 \begin{screen}
 	\begin{thm}
 		\label{Thm302}
-		B-spline基底関数の局所依存性
+		B-spline基底関数のノット依存性
 
-		$B_{(i,p)}|_{[k_j,k_{j+1}]}$はノット列の部分列$ \pare{k_{j-p+1}, \dots ,k_{j+p}} $のみによって決定される.
+		$p\ge 1$に対し, $B_{(i,p)}|_{[k_j,k_{j+1}]}$はノット列の部分列$ \pare{k_{j-p+1}, \dots ,k_{j+p}} $のみによって決定される.
 	\end{thm}
 \end{screen}
 \begin{proof}
-    図\ref{Fig301}を睨めば明らか.
+    帰納法で示す.
+    $p=1$については明らか.
+    % 帰納法で示す.
+    $t\in [k_{j},k_{j+1}]$とする.
+    B-spline基底関数の定義式\eqref{Eqn301}において, 係数の$\frac{t-k_{i}}{k_{i+p}-k_{i}},\frac{k_{i+p+1}-t}{k_{i+p+1}-k_{i+1}}$が影響するのは$t\in \supp(B_{(i,p-1)})=\Cl{(k_{i},k_{i+p})}, t\in \supp(B_{(i+1,p-1)})=\Cl{(k_{i+1},k_{i+p+1})}$の場合である.
+    よって帰納的に$B_{(i,p)}(t)$は$k_{j-p+1},\dots,k_{j+p}$のみで決定され, 定理が従う.
 \end{proof}
+次の図\ref{Fig303}は$p=3$での例である.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     % \includegraphics[page=9,clip,width=115mm]{fig.pdf}
     \includegraphics[page=1,clip,width=140mm]{figA.pdf}
-	\caption{B-Spline基底関数の例\protect\footnotemark}
+	\caption{B-Spline基底関数を決定するノット列\protect\footnotemark}
 	\label{Fig303}
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/wnp8e4xyyj}}
@@ -1166,6 +1164,17 @@ $\N_{(i,p)}$は直ぐ後の定理\ref{Thm305}で, $\N$はもう少し後の定�
         C_{(i,p)}&=\frac{t-k_{i}}{k_{i+p+1}-k_{i}}C_{(i,p-1)}+\frac{k_{i+p+1}-t}{k_{i+p+1}-k_{i}}C_{(i+1,p-1)} \\
         \dot{C}_{(i,p)}&=\frac{p}{k_{i+p+1}-k_{i}}\Pare{C_{(i,p-1)}-C_{(i+1,p-1)}}
     \end{align}
+    図\ref{Fig302}と同一のノット列に対する$p\leq 3$までの関数$C_{(i,p)}$は例えば次の図\ref{Fig305}のようになる.
+    \addtocounter{footnote}{-1}
+    \begin{figure}[H]
+    	\centering
+        % \includegraphics[page=9,clip,width=115mm]{fig.pdf}
+        \includegraphics[page=2,clip,width=111mm]{figA.pdf}
+    	\caption{関数$C_{(i,p)}$\protect\footnotemark}
+    	\label{Fig305}
+    \end{figure}
+    \footnotetext{\url{https://www.desmos.com/calculator/maxhnhnh9l}}
+    図から予想されるように, 以降では$C_{(i,p-1)}$同士の交点が$C_{(i,p)}$の極大点に一致する事を以下で示す.
     $B_{(i,p)}$は$C^1$級と仮定して良いのであったから, $B_{(i,p)}$が$\tau_{(i,p)}$で極大値を取るとすればそこで$C_{(i,p)}$も極大で, $\dot{C}_{(i,p)}(\tau_{(i,p)})=0$である.
     あとは$\tau_{(i,p)}\in \Pare{k_{i},k_{i+p+1}}$の一意性を示せば良い.
     帰納法で示す.
@@ -1255,6 +1264,8 @@ $B_{(i,p)}$と$C_{(i,p)}$にはそれぞれに良い性質があり, $C_{(i,p)}$
 	さらに$B_{(i,p)}\geq 0$より$B_{(i,p)}>1$となれば矛盾であるから$t\in[k_1, k_l)$において$0\leq B_{(i,p)}\leq 1$である.
 \end{proof}
 
+\newpage
+
 B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流儀がある.
 \begin{enumerate}
     \renewcommand{\labelenumi}{(\alph{enumi})}
@@ -1264,7 +1275,6 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \end{enumerate}
 これらのそれぞれについて, 以下でB-spline曲線の定義を述べる.
 
-\newpage
 \begin{screen}
 	\begin{defn}
         \label{Def300a}
@@ -1290,17 +1300,16 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/meyqjb90bw}}
 
-既に見たように, 区間$[k_{p+1},k_{l-p}]$の外では1の分割が充たされていない.
-無理やり区間$[k_{1},k_{l}]$で定義すると次の図\ref{Fig309}のようになる.
-
-\addtocounter{footnote}{-1}
-\begin{figure}[htbp]
-	\centering
-    \includegraphics[page=15,clip,width=160mm]{fig.pdf}
-	\caption{1の分割を充たさない例}
-	\label{Fig309}
-\end{figure}
-\footnotetext{\url{https://www.desmos.com/calculator/meyqjb90bw}}
+% 既に見たように, 区間$[k_{p+1},k_{l-p}]$の外では1の分割が充たされていない.
+% 無理やり区間$[k_{1},k_{l}]$で定義すると次の図\ref{Fig309}のようになる.
+% \addtocounter{footnote}{-1}
+% \begin{figure}[htbp]
+% 	\centering
+%     \includegraphics[page=15,clip,width=160mm]{fig.pdf}
+% 	\caption{1の分割を充たさない例}
+% 	\label{Fig309}
+% \end{figure}
+% \footnotetext{\url{https://www.desmos.com/calculator/meyqjb90bw}}
 
 
 \newpage
@@ -1356,7 +1365,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 この修正が無ければ, 1の分割が充たされる区間は閉区間$[k_1,k_l]$ではなく$[k_1,k_l)$となってしまう.
 定義(b)によるB-spline基底関数とB-spline曲線の例を次の図\ref{Fig300b}に示す.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=16,clip,width=160mm]{fig.pdf}
     \caption{B-spline曲線の例 (b)\protect\footnotemark}
@@ -1392,7 +1401,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \footnotetext{$\supp(\tilde{B}_{(i,p)})$は局所有限な$\setR$の被覆だから, $j\in\setZ$に関する無限和は収束する.}
 定義(c)によるB-spline基底関数とB-spline曲線の例を次の図\ref{Fig300c}に示す.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=17,clip,width=160mm]{fig.pdf}
     \caption{B-spline曲線の例 (c)\protect\footnotemark}
@@ -1592,7 +1601,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 	\end{align}
 	である.
 	これは$\mathcal{P}[p, \bm{k}]$よりも$\mathcal{P}[p', \bm{k}]$の方が多項式の次数に関して大きい集合であるが, 滑らかさに関しての制限が入るためである.%
-	\footnote{そもそも定理\ref{thm208}より$\dim(\mathcal{P}[p, \bm{k}])>\dim(\mathcal{P}[p', \bm{k}])$であるから包含関係が成立しない事は明らかである.}
+	\footnote{そもそも定理\ref{Thm308}より$\dim(\mathcal{P}[p, \bm{k}])>\dim(\mathcal{P}[p', \bm{k}])$であるから包含関係が成立しない事は明らかである.}
 \end{rem}
 
 上の注意における基底関数の滑らかさに関する制約を回避するための定理が次である.
