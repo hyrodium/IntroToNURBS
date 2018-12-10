@@ -306,7 +306,7 @@ Bernstein基底関数について次の帰納的な性質が成り立つ.
 \begin{screen}
 	\begin{thm}
 		\label{Thm101}
-		Bernstein基底関数の帰納的性質
+		Bernstein基底関数の漸化式
 
         Bernstein基底関数$B_{(i,p)}$について
 		\begin{align}
@@ -350,7 +350,7 @@ B\'ezier曲線について次の定理が成り立つ.
 \begin{screen}
 	\begin{thm}
 		\label{Thm105}
-		B\'ezier曲線の帰納的性質 (De Casteljauのアルゴリズム)
+		B\'ezier曲線の漸化式 (De Casteljauのアルゴリズム)
 
         帰納的に$\bm{q}_{(i,j)}$を
 		\begin{align}
@@ -767,7 +767,7 @@ B\'ezier曲線, 有理曲線と同じように, 制御点$\bm{a}_i$に対応す�
 つまり, ある区間$[k_{i}, k_{i+1})$に一つの多項式曲線が対応し, 別の区間$[k_{i-1}, k_{i})$には別の多項式曲線が対応するようにするのである.%
 \footnote{多項式の繋ぎ目にあたる数が$k_{i}$になっており, これがノット(knot)と呼ばれる理由である.}
 定義$\ref{Def101}$のように, B-spline基底関数$B_{(i,p)}$を直接定義することも可能ではあるが, あまりにも天下り的で, $2$項係数に対応する部分が複雑になってしまう.
-それを避けるため, B-spline基底関数では定理\ref{Thm101}のような, 帰納的性質を以って定義とすることが通常である.
+それを避けるため, B-spline基底関数では定理\ref{Thm101}のような, 漸化式を以って定義とすることが通常である.
 これが次の定義\ref{Def301}である.
 \begin{screen}
 	\begin{defn}
@@ -793,11 +793,11 @@ B\'ezier曲線, 有理曲線と同じように, 制御点$\bm{a}_i$に対応す�
 		ただし, 式(\ref{Eqn301})において分母が$0$であればその項を$0$とする.
 	\end{defn}
 \end{screen}
-次の図\ref{Fig301}は$n=7$とした際の$p\leq 3$までの基底関数の帰納的定義の関係を表したものである.
+次の図\ref{Fig301}は$n=7$とした際の$p\leq 3$までの基底関数の漸化式による定義の関係を表したものである.
 \begin{figure}[H]
 	\centering
     \includegraphics[page=8,clip,width=75mm]{fig.pdf}
-	\caption{B-Spline基底関数の帰納的定義}
+	\caption{B-Spline基底関数の漸化式による定義}
 	\label{Fig301}
 \end{figure}
 \noindent
@@ -1142,17 +1142,23 @@ $\N_{(i,p)}$は直ぐ後の定理\ref{Thm305}で, $\N$はもう少し後の定�
         基底関数の極大点一意性
 
         B-spline基底関数$B_{(i,p)}$のそれぞれに対して$\tau_{(i,p)}\in \setR$が存在し, $B_{(i,p)}$は$(-\infty, \tau_{(i,p)})$で広義単調増加, $[\tau_{(i,p)},+\infty)$で広義単調減少となる.
+        とくに, $B_{(i,p)}\in C^0(\setR)$なら$[k_{i},\tau_{(i,p)}]$で狭義単調増加, $[\tau_{(i,p)}, k_{i+p+1}]$で狭義単調減少とできる.
 	\end{thm}
 \end{screen}
 \begin{proof}
     $p=0$に対しては$\tau_{(i,p)}=k_{i+1}$, $p=1$に対しても$\tau_{(i,p)}=k_{i+1}$とすれば良い.
-    $p-\N_{(i,p)}(t^*)=2$なる$t^*$が存在すれば, $B_{(i,p)}$は定数だから$\tau_{(i,p)}$は任意に取れる.
+    $p-\N_{(i,p)}(t^*)=2$なる$t^*$が存在すれば, $B_{(i,p)}$は定数0だから$\tau_{(i,p)}$は任意に取れる.
     $p-\N_{(i,p)}(t^*)=1$なる$t^*$が存在すれば, $k_{i}<k_{i+1}=\cdots=k_{l-1}<k_{l}$であって, $t^*=k_{i+1}, B_{(i,p)}(t^*)=1$であるから, $\tau_{(i,p)}=k_{i+1}$とすれば良い.
 
     よって以降では, $p\ge 2$, $B_{(i,p)}\in C^1(\setR)$と仮定して良い.
-    この場合に, より強く$\tau_{(i,p)}\in \supp(B_{(i,p)})=\Squa{k_{i},k_{i+p+1}}$が存在して$\Squa{k_{i}, \tau_{(i,p)}}$で狭義単調増加, $\Squa{\tau_{(i,p)},k_{i+p+1}}$で狭義単調減少となることを示す.
+    この場合に, より強く
+    \begin{align}
+        \label{Eqn303}
+        \exists \tau_{(i,p)}\in \supp(B_{(i,p)}) \ \text{s.t.} \ B_{(i,p)}|_{\squa{k_{i}, \tau_{(i,p)}}}, -B_{(i,p)}|_{\squa{\tau_{(i,p)},k_{i+p+1}}}は狭義単調増加
+    \end{align}
+    が成り立つことを以下で示す.
 
-    関数$C_{(i,p)}$を次で定義する.
+    関数$C_{(i,p)}$を次で定義する.\footnote{$k_{i+p+1}-k_i=0$であれば$B_{(i,p)}=0$であった. しかし, $C_{(i,p)}$は(定数倍の差はあるが)Diracの$\delta$関数のように定義する方が自然である.}
     \begin{align}
         C_{(i,p)}
         =\frac{1}{k_{i+p+1}-k_{i}}B_{(i,p)}
@@ -1161,7 +1167,9 @@ $\N_{(i,p)}$は直ぐ後の定理\ref{Thm305}で, $\N$はもう少し後の定�
     \begin{align}
         B_{(i,p)}&=(t-k_{i})C_{(i,p-1)}+(k_{i+p+1}-t)C_{(i+1,p-1)} \\
         \dot{B}_{(i,p)}&=p(C_{(i,p-1)}-C_{(i+1,p-1)}) \\
+        \label{Eqn307}
         C_{(i,p)}&=\frac{t-k_{i}}{k_{i+p+1}-k_{i}}C_{(i,p-1)}+\frac{k_{i+p+1}-t}{k_{i+p+1}-k_{i}}C_{(i+1,p-1)} \\
+        \label{Eqn308}
         \dot{C}_{(i,p)}&=\frac{p}{k_{i+p+1}-k_{i}}\Pare{C_{(i,p-1)}-C_{(i+1,p-1)}}
     \end{align}
     図\ref{Fig302}と同一のノット列に対する$p\leq 3$までの関数$C_{(i,p)}$は例えば次の図\ref{Fig305}のようになる.
@@ -1174,54 +1182,53 @@ $\N_{(i,p)}$は直ぐ後の定理\ref{Thm305}で, $\N$はもう少し後の定�
     	\label{Fig305}
     \end{figure}
     \footnotetext{\url{https://www.desmos.com/calculator/maxhnhnh9l}}
-    図から予想されるように, 以降では$C_{(i,p-1)}$同士の交点が$C_{(i,p)}$の極大点に一致する事を以下で示す.
-    $B_{(i,p)}$は$C^1$級と仮定して良いのであったから, $B_{(i,p)}$が$\tau_{(i,p)}$で極大値を取るとすればそこで$C_{(i,p)}$も極大で, $\dot{C}_{(i,p)}(\tau_{(i,p)})=0$である.
-    あとは$\tau_{(i,p)}\in \Pare{k_{i},k_{i+p+1}}$の一意性を示せば良い.
-    帰納法で示す.
-
-    $p=P-1$に対して, $C_{(i,p)}$は一意的な極大値を$\tau_{(i,p)}$で取るとする.
-
-    さて, $C_{(i,p)}(t^*)=C_{(i+1,p)}(t^*)$となる$t^*$は一意的である.
-
-
-
-    $t\in (k_{i},\tau_{(i,P-1)}]$に対して
-    \begin{align}
-        C_{(i,P-1)}(t)>C_{(i+1,P-1)}(t)
-    \end{align}
-    を示す.
+    $B_{(i,p)}$は$C^1$級と仮定して良いのであったから, $B_{(i,p)}$が$\tau_{(i,p)}$で極大値を取るとすればその点で$C_{(i,p)}$も極大で, $\dot{C}_{(i,p)}(\tau_{(i,p)})=0$である.
+    図\ref{Fig305}と式\eqref{Eqn307}, \eqref{Eqn308}から分かるように, $C_{(i,p-1)}$どうしの交点は$C_{(i,p)}$の極大点に一致する.
+    あとは$\tau_{(i,p)}\in \Pare{k_{i},k_{i+p+1}}$の一意性, つまり$\dot{C}_{(i,p)}(t)=0$の解$\tau_{(i,p)}$がある区間の上で一意的であることを示せば良い.
+    冒頭で議論したように, $C_{(i,p-1)}\in C^0(\setR)\setminus C^1(\setR)$であれば, 式\eqref{Eqn303}を充たす$\tau_{(i,p-1)}$が存在する.
+    よってあとは$C^1$級の$C_{(i,p)}$に対して次が成り立つことを示せば十分である.
     \begin{align}
         \begin{aligned}
-            &{}C_{(i,P-1)}(t)-C_{(i+1,P-1)}(t) \\
-            ={}&\frac{t-k_{i}}{k_{i+p}-k_{i}}C_{(i,P-2)}(t)+\frac{k_{i+P}-t}{k_{i+p}-k_{i}}C_{(i+1,P-2)}(t) \\
-            &\quad-\frac{t-k_{i+1}}{k_{i+p+1}-k_{i+1}}C_{(i+1,P-2)}(t)-\frac{k_{i+P+1}-t}{k_{i+p+1}-k_{i+1}}C_{(i+2,P-2)}(t) \\
-            ={}&\frac{t-k_{i}}{k_{i+p}-k_{i}}C_{(i,P-2)}(t)+\frac{k_{i+P+1}-t}{k_{i+p+1}-k_{i+1}}C_{(i+1,P-2)}(t) \\
-            &\quad-\frac{t-k_{i}}{k_{i+p}-k_{i}}C_{(i+1,P-2)}(t)-\frac{k_{i+P+1}-t}{k_{i+p+1}-k_{i+1}}C_{(i+2,P-2)}(t) \\
-            ={}&\frac{t-k_{i}}{P-1}\dot{C}_{(i,P-1)}(t)+\frac{k_{i+P+1}-t}{P-1}\dot{C}_{(i+1,P-1)}(t) \\
-            ={}&\frac{1}{P-1}\Pare{\Pare{t-k_{i}}\dot{C}_{(i,P-1)}(t)+\Pare{k_{i+P+1}-t}\dot{C}_{(i+1,P-1)}(t)} \\
-            >{}&0
+            \Pare{\text{式\eqref{Eqn303}を充たす$\tau_{(i,p-1)}$, $\tau_{(i+1,p-1)}$が存在}}
+            \Rightarrow
+            \Pare{\text{式\eqref{Eqn303}を充たす$\tau_{(i,p)}$が存在}}
         \end{aligned}
     \end{align}
-    ただし$\dot{C}_{(i,P-1)}(t),\dot{C}_{(i+1,P-1)}(t)>0$を使った.
-    同様に$t\in [\tau_{(i+1,P-1)},k_{i+P+1})$に対して
-    \begin{align}
-        C_{(i,P-1)}(t)<C_{(i+1,P-1)}(t)
-    \end{align}
-    である.
-    よって$\dot{C}_{(i,p)}=\frac{p}{k_{i+p+1}-k_{i}}\Pare{C_{(i,p)}-C_{(i+1,p)}}=0$が解を取りうる区間は$[\tau_{(i,P-1)},\tau_{(i+1,P-1)}]$である.
-    さらに$\dot{C}_{(i,p)}$は$[\tau_{(i,P-1)},\tau_{(i+1,P-1)}]$上で狭義単調減少な連続関数だから逆関数が存在し, $\dot{C}_{(i,p)}(\tau_{(i,P-1)})>0, \dot{C}_{(i,p)}(\tau_{(i+1,P-1)})<0$である.
-    したがって$\dot{C}_{(i,p)}(t)=0$を充たす$t\in(\tau_{(i,P-1)},\tau_{(i+1,P-1)})$が一意的に存在し, この$t$が$\tau_{(i,P)}$である.
+    区間$(k_{i},\tau_{(i,p-1)})$, $(\tau_{(i,p-1)},\tau_{(i+1,p-1)})$, $(\tau_{(i+1,p-1)},k_{i+p+1})$に分けて考える.
+    \begin{itemize}
+        \item 区間$(k_{i},\tau_{(i,p-1)})$ \\
+        この区間で$C_{(i,p)}$は狭義単調増加である.
+        これは次式から分かる.
+        \begin{align}
+            \begin{aligned}
+                \frac{k_{i+p+1}-k_{i}}{p}\dot{C}_{(i,p)}
+                ={}&C_{(i,p-1)}(t)-C_{(i+1,p-1)}(t) \\
+                ={}&\frac{t-k_{i}}{k_{i+p}-k_{i}}C_{(i,p-2)}(t)+\frac{k_{i+p}-t}{k_{i+p}-k_{i}}C_{(i+1,p-2)}(t) \\
+                &\quad-\frac{t-k_{i+1}}{k_{i+p+1}-k_{i+1}}C_{(i+1,p-2)}(t)-\frac{k_{i+p+1}-t}{k_{i+p+1}-k_{i+1}}C_{(i+2,p-2)}(t) \\
+                ={}&\frac{t-k_{i}}{k_{i+p}-k_{i}}C_{(i,p-2)}(t)+\frac{k_{i+p+1}-t}{k_{i+p+1}-k_{i+1}}C_{(i+1,p-2)}(t) \\
+                &\quad-\frac{t-k_{i}}{k_{i+p}-k_{i}}C_{(i+1,p-2)}(t)-\frac{k_{i+p+1}-t}{k_{i+p+1}-k_{i+1}}C_{(i+2,p-2)}(t) \\
+                ={}&\frac{t-k_{i}}{p-1}\dot{C}_{(i,p-1)}(t)+\frac{k_{i+p+1}-t}{p-1}\dot{C}_{(i+1,p-1)}(t) \\
+                ={}&\frac{1}{p-1}\pare{\pare{t-k_{i}}\dot{C}_{(i,p-1)}(t)+\pare{k_{i+p+1}-t}\dot{C}_{(i+1,p-1)}(t)}
+                >0
+            \end{aligned}
+        \end{align}
+        ただし$\dot{C}_{(i,p-1)}(t),\dot{C}_{(i+1,p-1)}(t)>0$を使った.
+        $C_{(i,p-1)}, C_{(i+1,p-1)}\in C^1(\setR)$とは限らないが, その場合$\tau_{(i,p-1)}, \tau_{(i+1,p-1)}$がノット上にあるために$C_{(i,p-1)}, C_{(i+1,p-1)}\in C^1((k_i, \tau_{(i,p-1)}))$なので問題ない.
+        \item 区間$(\tau_{(i+1,p-1)},k_{i+p+1})$ \\
+        区間$(k_{i},\tau_{(i,p-1)})$と同様の方針で$C_{(i,p)}|_{(\tau_{(i+1,p-1)},k_{i+p+1})}$の狭義単調減少が示せる.
+        \item 区間$(\tau_{(i,p-1)},\tau_{(i+1,p-1)})$ \\
+        以上より, $\dot{C}_{(i,p)}=\frac{p}{k_{i+p+1}-k_{i}}\Pare{C_{(i,p)}-C_{(i+1,p)}}=0$が解を取りうる区間は$(\tau_{(i,p-1)},\tau_{(i+1,p-1)})$である.
+        さらに$\dot{C}_{(i,p)}$は$[\tau_{(i,p-1)},\tau_{(i+1,p-1)}]$上で狭義単調減少な連続関数だから逆関数が存在し, $\dot{C}_{(i,p)}(\tau_{(i,p-1)})>0, \dot{C}_{(i,p)}(\tau_{(i+1,p-1)})<0$である.
+        したがって$\dot{C}_{(i,p)}(t)=0$を充たす$\tau_{(i,p)}\in(\tau_{(i,p-1)},\tau_{(i+1,p-1)})$が一意的に存在する.
+    \end{itemize}
+以上を合わせて証明が完了する.
 \end{proof}
 
 \newpage
 普通はB-spline基底関数を定義\ref{Def301}から定義するが, 証明中で定義した$C_{(i,p)}$を先に定義してから$B_{(i,p)}$を定義しても問題ない.
-$B_{(i,p)}$と$C_{(i,p)}$にはそれぞれに良い性質があり, $C_{(i,p)}$の良い性質とは上の証明で見た
-\begin{align}
-    C_{(i,p)}=
-\end{align}
-のことである.
+$B_{(i,p)}$と$C_{(i,p)}$にはそれぞれの良い性質があり, $C_{(i,p)}$の良い性質とは上の証明で見た図\ref{Fig305}, 式\eqref{Eqn307}, \eqref{Eqn308} と等式$\int_\setR C_{(i,p)}dt=\sfrac{1}{(p+1)}$\footnote{後で使う訳ではないので未証明とした. 証明は簡単.}である.
 これに対して, $B_{(i,p)}$の良い性質は$1$の分割である.%
-\footnote{後の定理\ref{Thm307}で見るが, 特定の条件下で$B_{(i,p)}$はBernsterin多項式に一致する. この条件下で$C_{(i,p)}$も一致している.}
+\footnote{後の定理\ref{Thm307}で見るが, B-spline基底関数$B_{(i,p)}$は特定の条件下でBernsterin多項式に一致する. この条件下で$C_{(i,p)}$もこれらに一致している.}
 \begin{screen}
 	\begin{thm}
 		\label{Thm306}
@@ -1450,7 +1457,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 		\tilde{B}_{(i,j)}:=B_{(i-j+p,j)}^{\text{B-sp}}
 	\end{align}
 	とおく.
-	この基底関数についてB-splineの帰納的定義(\ref{Eqn301})から
+	この基底関数についてB-splineの漸化式による定義(\ref{Eqn301})から
 	\begin{align}
 		\begin{aligned}
 			\tilde{B}_{(i,j)}
@@ -1461,13 +1468,14 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 		\end{aligned}
 	\end{align}
 	であり, さらに$i\notin \Z{0}{j}$に対して$B_{(i,j)}^{\text{B\'ez}}=\tilde{B}_{(i,j)}=0$で, $B_{(1,0)}^{\text{B\'ez}}=\tilde{B}_{(1,0)}=1$である.
-    つまり, $\tilde{B}_{(i,j)}$は定理\ref{Thm101}と同じ帰納的性質を充たす.
-	よって$\tilde{B}_{(i,j)}$と$B_{(i,j)}^{\text{B\'ez}}$は同じ帰納的性質を持つから, $\tilde{B}_{(i,j)}=B_{(i,j)}^{\text{B\'ez}}$である.
+    つまり, $\tilde{B}_{(i,j)}$は定理\ref{Thm101}と同じ漸化式を充たす.
+	よって$\tilde{B}_{(i,j)}$と$B_{(i,j)}^{\text{B\'ez}}$は同じ漸化式を持つから, $\tilde{B}_{(i,j)}=B_{(i,j)}^{\text{B\'ez}}$である.
 	故に
 	\begin{align}
 		B_{(i,j)}^{\text{B\'ez}}(t)=B_{(i-j+p,j)}^{\text{B-sp}}(t)
 	\end{align}
-	であり, $j=p$とすれば
+	である.
+    とくに, $j=p$とおけば
 	\begin{align}
 		B_{(i,p)}^{\text{B\'ez}}(t)=B_{(i,p)}^{\text{B-sp}}(t)
 	\end{align}
