@@ -14,6 +14,12 @@
 \usepackage{braket}
 \usepackage{hhline}
 \usepackage{color}
+% \usepackage{ccicons}
+\usepackage[
+    type={CC},
+    modifier={by},
+    version={4.0},
+]{doclicense}
 \usepackage[all]{xy}
 \usepackage[dvipdfmx,colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{atbegshi}
@@ -23,9 +29,11 @@
   \AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
 \fi
 
-\usepackage[color]{showkeys}
-\definecolor{refkey}{rgb}{0.15,0.8,0.2}
-\definecolor{labelkey}{rgb}{0.15,0.8,0.2}
+
+% \usepackage[color]{showkeys}
+% \definecolor{refkey}{rgb}{0.15,0.8,0.2}
+% \definecolor{labelkey}{rgb}{0.15,0.8,0.2}
+
 
 %macro
 
@@ -214,17 +222,18 @@ NURBSは「物体の形状表現」という工学への応用が重視される
     % 形状表現ではなく, スプライン関数による補間などを扱った書籍.
     % 初学者向けではない.
     \item 3Dグラフィックスのための数学入門 クォータニオン・スプライン曲線の基礎 \\
-    高校数学の復習から四元数による回転も扱っているため, どうしてもNURBSに関連した記述は限られてしまっている.
+    NURBSについて書かれた最近の和書は少なく, その意味で貴重である.
+    しかし高校数学の復習から四元数による回転も扱っているため, どうしてもNURBSに関連した記述は限られてしまっている.
     \item 情報科学 CAD/CAMにおける曲線曲面のモデリング \\
     B-spline曲線をCox-de Boorの漸化式で定義せずに, B\'{e}zier曲線を区分的に繋げたものとして導入している.
     本文章で扱わなかった, 曲面の干渉の話題もある.
-    \item NURBS―射影幾何学から実務まで \\
-    射影幾何や円錐曲線など, 導入が独特である.
-    \item CAD・CG技術者のためのNURBS早わかり \\
-    読み物調で, 語り口に少し癖がある.
-    感性の合う人には感覚を掴むのに良いのかも知れない.
-    \item CAD・CG技術者のための実践NURBS \\
-    ページ数の割に基本的な話に終始している.
+    \item NURBS ― 射影幾何学から実務まで \\
+    射影幾何や円錐曲線などの話題もあり, 導入が独特である.
+    % \item CAD・CG技術者のためのNURBS早わかり \\
+    % 読み物調で, 語り口に少し癖がある.
+    % 感性の合う人には感覚を掴むのに良いのかも知れない.
+    % \item CAD・CG技術者のための実践NURBS \\
+    % ページ数の割に基本的な話に終始している.
 \end{itemize}
 
 % \newpage
@@ -239,12 +248,21 @@ NURBSは「物体の形状表現」という工学への応用が重視される
     \> \labelitemi \, $\#S$ \> 集合$S$の元の個数. 本文章では有限集合に対してのみこの記号を使う. \\
     \> \labelitemi \, $C^{r}(U)$ \> $U$上の関数のうち, $r$階導関数が連続なもの全体の集合. $C^0$は単に連続関数. \\
     \> \labelitemi \, $A\subset B$ \> 集合$A,B$の包含関係. 真部分集合とは限らない. \\
-    \> \labelitemi \, $\supp(f)$ \> 関数$f:U\to\setR$の台. $\Cl{\Set{x\in U|f(x)\neq 0}}$で定義される.
+    \> \labelitemi \, $\Cl{A}$ \> 集合$A$の閉包. \\
+    \> \labelitemi \, $\conv{A}$ \> 集合$A$の凸包. \\
+    \> \labelitemi \, $\supp(f)$ \> 関数$f:U\to\setR$の台. $\supp(f)=\Cl{\Set{x\in U|f(x)\neq 0}}$で定義される.
 \end{tabbing}
 
 
-\tableofcontents
 
+\section*{この文章について}
+図は\href{https://www.coreldraw.com}{CorelDRW}, \href{https://juliagraphics.github.io/Luxor.jl/stable/}{Luxor (Julia package)}, \href{https://www.wolfram.com/mathematica/}{Mathematica}, \href{http://www.povray.org/}{POV-Ray}を使って作成した.
+可能な限り図には\href{https://www.desmos.com/}{Desmos graphing calculator}へのリンクを付けており, インタラクティブに動かして理解が進むようにした.
+このpdfファイルは\LaTeX でコンパイルして作成した.
+この文章のライセンスは(CC BY 4.0)とする.
+\doclicenseThis
+
+\tableofcontents
 
 \newpage
 \pagenumbering{arabic}
@@ -1704,7 +1722,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
     \caption{$\setR^2$に埋め込まれたB\'{e}zier曲面\protect\footnotemark}
 	\label{Fig401}
 \end{figure}
-\footnotetext{\url{https://www.desmos.com/calculator/pm7rb9zbew}}
+\footnotetext{\url{https://www.desmos.com/calculator/2vy911g23r}}
 次の図\ref{Fig402}は$d=2, \tilde{d}=3$での$3\times 3$次のB\'{e}zier曲面の例である.
 \begin{figure}[H]
     \begin{minipage}{0.5\hsize}
@@ -1892,7 +1910,7 @@ NURBS多様体でも区分多項式空間$\mathcal{P}[p,\bm{k}]$の包含関係�
 \end{proof}
 
 さて, NURBSの$h$-細分は局所的に形状を変化させるための操作である.
-つまり, ノット列の集まっている所では制御点の数が増え, その付近での変形の自由度が向上するのである.
+つまり, ノット列の集まっている所では制御点の数が増え, その付近での変形の自由度が増えることを利用するのである.
 次の図\ref{Fig603}は$\Omega_{22}$内でのノットを増やした際の模式図である.
 \begin{figure}[H]
 	\centering
@@ -1900,7 +1918,7 @@ NURBS多様体でも区分多項式空間$\mathcal{P}[p,\bm{k}]$の包含関係�
     \caption{$h$-細分の模式図}
 	\label{Fig603}
 \end{figure}
-$\Omega_{22}$の上でのノットの密度を上げたかったのだが, この図においては$\Omega_{12}, \Omega_{21}$にも余計にノット列が挿入されている.
+$\Omega_{22}$の上でのノットの密度を上げたかったのだが, $\Omega_{12}, \Omega_{21}$にも余計にノット列が挿入されている.
 これを解決するための手法がT-spline\footnote{T-splineではパラメータ空間の分割や制御点のを結ぶグラフにT字形状が現れる. これがT-splineと呼ばれる理由である.}である.
 その概略図が次の図\ref{Fig604}である.
 \begin{figure}[H]
