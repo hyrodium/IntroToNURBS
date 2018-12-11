@@ -1302,18 +1302,20 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 ノット列に関する仮定$k_{l-p}<k_{l}$は$[k_{p+1},k_{l-p}]$上で1の分割が充たされるようにするためのものである.
 定義(a)によるB-spline基底関数とB-spline曲線の例を次の図\ref{Fig300a}に示す.
 \addtocounter{footnote}{-1}
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=15,clip,width=160mm]{fig.pdf}
 	\caption{B-spline曲線の例 (a)\protect\footnotemark}
 	\label{Fig300a}
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/meyqjb90bw}}
+図\ref{Fig300a}右側の破線部は区間$[k_{1},k_{p+1}], [k_{l-p},k_{l}]$に対応する部分である.
+これらの区間では1の分割が充たされないためにAffine不変性(定理\ref{affine})を充たさないし, 凸包性(定理\ref{convex})を充たすとも限らない.
 
 % 既に見たように, 区間$[k_{p+1},k_{l-p}]$の外では1の分割が充たされていない.
 % 無理やり区間$[k_{1},k_{l}]$で定義すると次の図\ref{Fig309}のようになる.
 % \addtocounter{footnote}{-1}
-% \begin{figure}[htbp]
+% \begin{figure}[H]
 % 	\centering
 %     \includegraphics[page=15,clip,width=160mm]{fig.pdf}
 % 	\caption{1の分割を充たさない例}
@@ -1691,11 +1693,40 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
     定理\ref{affine}, 定理\ref{convex}は曲線($d=1$)について述べたものであったが, これらの性質は一般の$d\in \setN$まで拡張できる.
 \end{rem}
 
+\newpage
+
+基底関数が全てBernstein多項式から構成されるような形状をB\'{e}zier多様体と呼ぶ.
+次の図\ref{Fig401}は$d=\tilde{d}=2$での$1\times 2$次のB\'{e}zier曲面の例である.
+\addtocounter{footnote}{-1}
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=10,clip,width=80mm]{figA.pdf}
+    \caption{$\setR^2$に埋め込まれたB\'{e}zier曲面\protect\footnotemark}
+	\label{Fig401}
+\end{figure}
+\footnotetext{\url{https://www.desmos.com/calculator/pm7rb9zbew}}
+次の図\ref{Fig402}は$d=2, \tilde{d}=3$での$3\times 3$次のB\'{e}zier曲面の例である.
+\begin{figure}[H]
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+            \includegraphics[page=12,clip,width=80mm]{figA.pdf}
+        \end{center}
+        \caption{$\setR^3$に埋め込まれたB\'{e}zier曲面}
+        \label{Fig402}
+    \end{minipage}
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+            \includegraphics[page=13,clip,width=80mm]{figA.pdf}
+        \end{center}
+        \caption{B\'{e}zierB曲線の軌跡としての\'{e}zier曲面}
+        \label{Fig403}
+    \end{minipage}
+\end{figure}
+とくに, B\'{e}zier曲面は制御点がB\'{e}zier曲線を動くようなB\'{e}zier曲線の軌跡として実現できる. (図\ref{Fig403})
+これは簡単な計算で確かめられる.
 
 
-
-
-% まずは簡単のために2次元(曲面)を考えよう.
+%まずは簡単のために2次元(曲面)を考えよう.
 %
 %
 %
@@ -1730,10 +1761,11 @@ B-splineは先に説明した通りである.
 	\end{defn}
 \end{screen}
 重みの決定には, 各B-spline基底関数に対する重みのテンソル積のように構成する場合\footnote{つまり例えば, $w_{i^1\cdots i^d}=w_{i^1}\cdots w_{i^d}$という具合にである.}も多いが, より一般のためにこのような$w_{ijk}$の形を採用している.
-何より次で述べる制御点$\bm{a}_{i^1\cdots i^d}$と重み$w_{i^1\cdots i^d}$が一対一に対応している方が直感的に扱いやすい.
+何より定義\ref{Def501}での制御点$\bm{a}_{i^1\cdots i^d}$と重み$w_{i^1\cdots i^d}$が一対一に対応している方が直感的に扱いやすい.
 
 \begin{screen}
 	\begin{defn}
+        \label{Def501}
         NURBS多様体
 
         NURBS基底関数$B_{i^1\cdots i^d}$, 制御点 $\bm{a}_{i^1\cdots i^d}\in\setR^{\tilde{d}}$が定まれば, NURBS多様体は
@@ -1745,26 +1777,92 @@ B-splineは先に説明した通りである.
 	\end{defn}
 \end{screen}
 
-次の図は$d=\tilde{d}=2, p^1=3, p^2=2, w_{ij}=1$での例である.
-
-表紙の図は$d=\tilde{d}=3, p^1=1, p^2=2, p^3=2, \bm{k}^1=(0,0,1,1), \bm{k}^2=(0,0,0,1,1,2,2,3,3,4,4,4), \bm{k}^3=(0,0,0,1,1,2,2,3,3,4,4,4)$とした例である.
-制御点の配置は図の通りで, 重みは図に書き込んだ通りである.
-
-
+次の図\ref{Fig501}は$d=\tilde{d}=2, p^1=3, p^2=2, w_{ij}=1$での例である.
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=4,clip,width=120mm]{figA.pdf}
+    \caption{2次元NURBS多様体}
+	\label{Fig501}
+\end{figure}
 
 \newpage
+表紙の図は$d=\tilde{d}=3, p^1=1, p^2=2, p^3=2, \bm{k}^1=(0,0,1,1), \bm{k}^2=(0,0,0,1,1,2,2,3,3,4,4,4), \bm{k}^3=(0,0,0,1,1,2,2,3,3,4,4,4)$とした例である.
+制御点の配置は図\ref{Fig502}の通りで, 重みは紙面の都合で一部のみ書き込んだ.
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=5,clip,width=130mm]{figA.pdf}
+    \caption{3次元NURBS多様体}
+	\label{Fig502}
+\end{figure}
+NURBS多様体は 有理化・区分化・多次元化 の拡張によってその柔軟性を獲得したが, これでもまだ複雑な形状には対応できない場合も多い.
+その場合は, 有限個のNURBS多様体を張り合わせて形状を構成する.
+この手法は多重パッチと呼ばれる.
+次の図\ref{Fig503}は多重パッチの概略図である.%
+\footnote{連結な1次元多様体は$\setR$と$S^1$に分類でき, それぞれに対応するように定義\ref{Def300a}, \ref{Def300b}, \ref{Def300c}が構成できた. しかし2次元以上だと分類が複雑になるため, このような多重パッチが必要となるのである.}
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=9,clip,width=140mm]{figA.pdf}
+    \caption{多重パッチ}
+	\label{Fig503}
+\end{figure}
+
+\newpage
+
 \section{NURBS多様体の細分とT-spline}
 B\'{e}zier曲線では, 制御点を適切に配置すれば任意の$2$次B\'{e}zier曲線を$3$次B\'{e}zier曲線で表すことができる.
-
-[図]
-
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=3,clip,width=90mm]{figA.pdf}
+    \caption{2次B\'{e}zier曲線と$3$次B\'{e}zier曲線への変換}
+	\label{Fig601}
+\end{figure}
 これは多項式空間の包含関係(定理\ref{Thm103})が本質的であって, 当然のように任意の$3$次B\'{e}zier曲線を$2$次B\'{e}zier曲線で表すことはできない.
-NURBSでも区分多項式空間$\mathcal{P}[p,\bm{k}]$によって制御点を増やすことが出来る.
-この操作は細分\footnote{細分と書いたが, 定着した日本語は無い. 英語ではrefinementと呼ばれる.}と呼ばれ. とくに, 定理\ref{Thm310}によるものが$h$-細分, 定理\ref{Thm311}によるものが$p$-細分である.
+NURBS多様体でも区分多項式空間$\mathcal{P}[p,\bm{k}]$の包含関係によって制御点を増やすことが出来る.
+この操作は細分\footnote{細分と書いたが, 定着した日本語は無い. 英語ではrefinementと呼ばれる.}と呼ばれ, とくに定理\ref{Thm310}によるものが$h$-細分, 定理\ref{Thm311}によるものが$p$-細分である.
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=11,clip,width=150mm]{figA.pdf}
+    \caption{NURBS多様体の細分}
+	\label{Fig602}
+\end{figure}
+細分前の基底関数, 制御点を$B_I, \bm{a}_I$, 細分後の基底関数, 制御点を$B_I', \bm{a}_I'$とする.
+細分後の制御点などを求めるには, 次が充たされることを考えれば良い.
+\begin{align}
+    \sum_I B_I\bm{a}_I
+    =\sum_J B_J'\bm{a}_J'
+\end{align}
+具体的に展開すれば
+\begin{align}
+    \sum_I B_I\bm{a}_I
+    &=\sum_{i^1,\dots,i^d} \frac{B_{(i^1,p^1)}(t^1)\cdots B_{(i^d,p^d)}(t^d)w_{i^1\cdots i^d}}{\sum\limits_{j^1,\dots,j^d}B_{(j^1,p^1)}(t^1)\cdots B_{(j^d,p^d)}(t^d)w_{j^1\cdots j^d}}\bm{a}_{i^1\cdots i^d} \\
+    \sum_I B'_I\bm{a}'_I
+    &=\sum_{i^1,\dots,i^d} \frac{B'_{(i^1,p^1)}(t^1)\cdots B'_{(i^d,p^d)}(t^d)w'_{i^1\cdots i^d}}{\sum\limits_{j^1,\dots,j^d}B'_{(j^1,p^1)}(t^1)\cdots B'_{(j^d,p^d)}(t^d)w'_{j^1\cdots j^d}}\bm{a}'_{i^1\cdots i^d}
+\end{align}
+であり, まずは分母の一致のために次を充たす$w'_I$を決定する.
+\begin{align}
+{\sum\limits_{i^1,\dots,i^d}B_{(i^1,p^1)}(t^1)\cdots B_{(i^d,p^d)}(t^d)w_{i^1\cdots i^d}}
+={\sum\limits_{j^1,\dots,j^d}B'_{(j^1,p^1)}(t^1)\cdots B'_{(j^d,p^d)}(t^d)w'_{j^1\cdots j^d}}
+\end{align}
+細分の条件から, $B_{(i^s,p^s)}=\sum_{j^s}A^s_{i^sj^s}B'_{(j^s,p^s)}$を充たす行列$A^s_{i^sj^s}$が存在するから
+\begin{align}
+    w'_{j^1\cdots j^d}
+    =\sum_{i^1,\dots,i^d}A^1_{i^1j^1}\cdots A^d_{i^dj^d} w_{i^1\cdots i^d}
+\end{align}
+とすれば良い.
+続いて分子の一致のために次を充たす$\bm{a}'_I$を決定する.
+\begin{align}
+    \sum_{i^1,\dots,i^d} B_{(i^1,p^1)}(t^1)\cdots B_{(i^d,p^d)}(t^d)w_{i^1\cdots i^d}\bm{a}_{i^1\cdots i^d}
+    =\sum_{j^1,\dots,j^d} B'_{(j^1,p^1)}(t^1)\cdots B'_{(j^d,p^d)}(t^d)w'_{j^1\cdots j^d}\bm{a}'_{j^1\cdots j^d}
+\end{align}
+ここでも$w'_I$と同様に考えて
+\begin{align}
+    \bm{a}'_{j^1\cdots j^d}
+    =\frac{\sum\limits_{i^1,\dots,i^d} A^1_{i^1j^1}\cdots A^d_{i^dj^d} w_{i^1\cdots i^d}\bm{a}_{i^1\cdots i^d}}{w'_{j^1\cdots j^d}}
+\end{align}
+とすれば良い.
 
-[図]
-
-細分後の制御点$\bm{a}_I$や重み$w_I$の計算のためには$f\in \mathcal{P}[p,\bm{k}]$を基底$B_{(i,p)}$の線型結合$f=\sum_iB_{(i,p)}a_i$で表す必要がある.
+基本的には上の通りにすれば細分が可能であるが, 問題として$A^s_{ij}$の計算が残っている.
+このために, より一般に関数$f\in \mathcal{P}[p,\bm{k}]$を基底$B_{(i,p)}$の線型結合$f=\sum_iB_{(i,p)}a_i$で表す手法を構成しよう.
 これは関数の線型結合だから, $a_i$の決定のためには適当に$n$個の点$\kappa_j$を取って次が満たされるようにすれば良い.
 \begin{align}
     f(\kappa_j)=\sum_{i}B_{(i,p)}(\kappa_j)a_i
@@ -1774,10 +1872,10 @@ NURBSでも区分多項式空間$\mathcal{P}[p,\bm{k}]$によって制御点を�
 当然$\kappa_j$には任意性があるが, 次のようにして選べば行列$B_{(i,p)}(\kappa_j)$を可逆に構成することが出来る.
 \begin{align}
     \label{Eqn601}
-    \kappa_i=\frac{1}{2}\Pare{k_i+k_{i+p+1}}
+    \kappa_i=\frac{1}{2}\Pare{\frac{i}{n+1}k_i+\frac{n-i+1}{n+1}k_{i+p+1}}
 \end{align}
 天下り的になってしまったが, 要するにこれは区間$\supp(B_{(i,p)})$を$n+1$等分してその点を順に選んでいるだけである.
-式\eqref{Eqn601}による$\kappa_i$の決定によって行列$B_{(i,p)}(\kappa_j)$が可逆になる事は次の定理から保証される.
+式\eqref{Eqn601}で決定した行列$B_{(i,p)}(\kappa_j)$が可逆になる事は次の定理\ref{Thm601}から保証される.
 \begin{screen}
 	\begin{thm}
         \label{Thm601}
@@ -1793,6 +1891,54 @@ NURBSでも区分多項式空間$\mathcal{P}[p,\bm{k}]$によって制御点を�
     よって$\Pare{B_1(\kappa_a),\dots,B_n(\kappa_a)}, \Pare{B_1(\kappa_b),\dots,B_n(\kappa_b)}$は$\setR^n$上で線形独立である.
 \end{proof}
 
+さて, NURBSの$h$-細分は局所的に形状を変化させるための操作である.
+つまり, ノット列の集まっている所では制御点の数が増え, その付近での変形の自由度が向上するのである.
+次の図\ref{Fig603}は$\Omega_{22}$内でのノットを増やした際の模式図である.
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=6,clip,width=120mm]{figA.pdf}
+    \caption{$h$-細分の模式図}
+	\label{Fig603}
+\end{figure}
+$\Omega_{22}$の上でのノットの密度を上げたかったのだが, この図においては$\Omega_{12}, \Omega_{21}$にも余計にノット列が挿入されている.
+これを解決するための手法がT-spline\footnote{T-splineではパラメータ空間の分割や制御点のを結ぶグラフにT字形状が現れる. これがT-splineと呼ばれる理由である.}である.
+その概略図が次の図\ref{Fig604}である.
+\begin{figure}[H]
+	\centering
+    \includegraphics[page=7,clip,width=60mm]{figA.pdf}
+    \caption{T-splineの座標空間の模式図}
+	\label{Fig604}
+\end{figure}
+つまり, $\Omega_{22}\subset\supp(B_I)$を充たすような基底関数$B_I$に関する制御点$\bm{a}_I$だけを細分後に動かすこととし, それ以外は動かさないように決めておくのである.
+このようにして$\Omega_{12},\Omega_{22}$上でのT-splineのパラメータ付けは細分後に変化しないようにでき, この領域に対応する制御点は細分前のものとする事で, 制御点を削減することが出来るのである.
+T-splineとNURBSの差分は単にデータの取り扱い方にあって, そこには数学的なギャップは殆ど存在しない.%
+\footnote{更に言えば, T-splineで表現可能な形状はNURBSでも表現可能であって, 逆にNURBSで表現可能な形状はT-splineでも表現可能である.}
+
+
+
+
+%
+% \begin{align}
+%     B_{i^1\cdots i^d}:I^1\times\cdots\times I^d\to\setR;
+%     (t^1,\dots,t^d)\mapsto\frac{B_{(i^1,p^1)}(t^1)\cdots B_{(i^d,p^d)}(t^d)w_{i^1\cdots i^d}}{\sum\limits_{j^1,\dots,j^d}B_{(j^1,p^1)}(t^1)\cdots B_{(j^d,p^d)}(t^d)w_{j^1\cdots j^d}}
+% \end{align}
+% で定義される.
+% ただし, $I^i$は各次元の方向でのB-spline基底関数の定義域で, 定義\ref{Def300a}, 定義\ref{Def300b}, 定義\ref{Def300c}の何れかによって定義される.
+% \end{defn}
+% \end{screen}
+% 重みの決定には, 各B-spline基底関数に対する重みのテンソル積のように構成する場合\footnote{つまり例えば, $w_{i^1\cdots i^d}=w_{i^1}\cdots w_{i^d}$という具合にである.}も多いが, より一般のためにこのような$w_{ijk}$の形を採用している.
+% 何より定義\ref{Def501}での制御点$\bm{a}_{i^1\cdots i^d}$と重み$w_{i^1\cdots i^d}$が一対一に対応している方が直感的に扱いやすい.
+%
+% \begin{screen}
+% \begin{defn}
+% \label{Def501}
+% NURBS多様体
+%
+% NURBS基底関数$B_{i^1\cdots i^d}$, 制御点 $\bm{a}_{i^1\cdots i^d}\in\setR^{\tilde{d}}$が定まれば, NURBS多様体は
+% \begin{align}
+%     \bm{p}:I^1\times\cdots\times I^d\to\setR^{\tilde{d}};
+%     (t^1,\dots,t^d)\mapsto\sum_{i^1,\dots,i^d} B_{i^1\cdots i^d}(t^1,\dots,t^d)\bm{a}_{i^1\cdots i^d}
+% \end{align}
 
 
 \end{document}
@@ -1946,7 +2092,7 @@ Multiple Patchは飽くまでNURBS多様体を表現するためのものに過�
 \end{align}
 ただし$\Omega$は連結な領域であり, $\A{i}\neq j , \Omega_i\cap\Omega_j=\varnothing$である.
 この様子を表したものが次の図\ref{fig901}である.
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
     \includegraphics[page=4,clip,width=150mm]{fig_g.pdf}
 	\caption{Multiple Patch}
