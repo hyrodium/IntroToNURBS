@@ -779,7 +779,7 @@ B\'ezier曲線, 有理曲線と同じように, 制御点$\bm{a}_i$に対応す�
 \footnote{英語ではknot vectorと呼ばれるが, $\bm{k}$に対して(単位元や逆元の存在する通常の)加法やスカラー倍を定義する訳ではないから, 単にノット列とする方が筆者の好みである.
 }, $k_{i}$はノットと呼ばれる.
 %ノットは$t$の動く範囲に対応した数である.
-つまり, ある区間$[k_{i}, k_{i+1})$に一つの多項式曲線が対応し, 別の区間$[k_{i-1}, k_{i})$には別の多項式曲線が対応するようにするのである.%
+つまり, ある区間$[k_{i}, k_{i+1})$に一つの多項式曲線が対応し, 別の区間$[k_{j}, k_{j+1})$には別の多項式曲線が対応するようにするのである.%
 \footnote{多項式の繋ぎ目にあたる数が$k_{i}$になっており, これがノット(knot)と呼ばれる理由である.}
 定義$\ref{Def101}$のように, B-spline基底関数$B_{(i,p)}$を直接定義することも可能ではあるが, あまりにも天下り的で, $2$項係数に対応する部分が複雑になってしまう.
 それを避けるため, B-spline基底関数では定理\ref{Thm101}のような, 漸化式を以って定義とすることが通常である.
@@ -1580,9 +1580,29 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \end{screen}
 
 \begin{proof}
-	$\mathcal{P}[p, \bm{k}]$が線形空間である事は直ぐに分かる.
-    問題は次元であり, 厳密な証明はまだ書けてない.
-    あるいは定理\ref{Thm309}と同時に示すのが楽かな.
+    % $n=\# \bm{k}-p-1$とおく.
+    $\mathcal{P}[p, \bm{k}]$が線形空間である事は直ぐに分かる.
+    まずはノットの重複が無い(つまり$\max\limits_{t\in\setR}\N(t)\le 1$)と仮定して$I_i=[k_{i}, k_{i+1})$とおく.
+    $\# \bm{k}-1$個の各区間$I_i$のそれぞれに多項式
+    \begin{align}
+        g_{i}(t)=a_{i,0}t^{0}+a_{i,1}t^{1}+\cdots+a_{i,p-1}t^{p-1}+a_{i,p}t^{p}
+    \end{align}
+    が対応するとする.
+    これは$f\in \mathcal{P}[p,\bm{k}]$から$a_{i,j}\in \setR^{(\# \bm{k}-1)\cdot(p+1)}$への単射が存在することを意味している.
+    % つまり, $(\# \bm{k}-1)\cdot(p+1)$個の実数$a_{i,j}$があれば$f\in \mathcal{P}[p,\bm{k}]$を表すことが出来る.
+    しかし, 滑らかさに関する条件$\A t\in\setR, \E \varepsilon>0, f|_{(t-\varepsilon,t+\varepsilon)}\in C^{p-1}$より$f\in \mathcal{P}[p,\bm{k}]$から$a_{i,j}\in \setR^{(\# \bm{k}-1)\cdot(p+1)}$への全射は存在しない.
+    具体的には各ノット$k_i$の上で次式の条件が入り, $p$だけ自由度が減っているのである.
+    \begin{align}
+        \Pare{\od{}{t}}^{(j)}g_{i-1}(k_{i})&=\Pare{\od{}{k_{i}}}^{(j)}g_{i}(t) \qquad (0 \le j \le p-1)
+    \end{align}
+    ただし定義\ref{Def305}での$f|_{\mathbb{R}\backslash[k_1,k_l)}=0$より$g_{-1}=g_{\# \bm{k}}=0$とおいた.
+    つまり, 各ノット$k_i$に対して$\setR^{(\# \bm{k}-1)\cdot(p+1)-p}$次元の部分空間$(\subset \setR^{(\# \bm{k}-1)\cdot(p+1)})$が対応し, これが$a_{i,j}$の入る空間になっている.
+    全てのノット$k_i$について部分空間を集めて共通部分を取れば$a_{i,j}$は結局$(\# \bm{k}-1)\cdot(p+1)-p\cdot \#\bm{k}$次元の部分空間に入ることになる.
+    換言すれば$\dim\Pare{\mathcal{P}[p,\bm{k}]}=\# \bm{k}-p-1$である.
+
+    ノットに重複がある場合でも同様で, 区間$I_i$の数は減るがそれに伴って拘束の数も減るため$\dim\Pare{\mathcal{P}[p,\bm{k}]}=\# \bm{k}-p-1$となる.
+    % 問題は次元であり, 厳密な証明はまだ書けてない.
+    % あるいは定理\ref{Thm309}と同時に示すのが楽かな.
 	% 問題はその次元である.
 	% 簡単のために$p=1, \bm{k}=\subknot{\bm{k}}$としよう.
 	% この場合, $\mathcal{P}[p, \bm{k}]$は折れ線となって$\dim(\mathcal{P}[p, \bm{k}])=\#{\bm{k}}-p-1$である.
@@ -1594,15 +1614,14 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \begin{screen}
 	\begin{thm}
         \label{Thm309}
-		B-spline基底関数の張る線形空間
+		区分多項式空間の基底
 
 		$\curl{B_{(i,p)}} \ (i\in \Z{1}{\#{\bm{k}}-p-1})$は線形空間$\mathcal{P}[p, \bm{k}]$の基底である.
 	\end{thm}
 \end{screen}
 
 \begin{proof}
-    線形独立は明らか.
-    定理\ref{Thm308}の証明が埋まれば基底になることも示せる.
+    線形独立は明らかで, 基底関数$B_{(i,p)}$の数と空間の次元が一致するから定理が従う.
 \end{proof}
 
 \begin{screen}
@@ -1722,7 +1741,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/2vy911g23r}}
 次の図\ref{Fig402}は$d=2, \tilde{d}=3$での$3\times 3$次のB\'{e}zier曲面の例である.
-とくに, B\'{e}zier曲面は制御点がB\'{e}zier曲線を動くようなB\'{e}zier曲線の軌跡として実現できる. (図\ref{Fig403})
+とくに, B\'{e}zier曲面は制御点がB\'{e}zier曲線を動くようなB\'{e}zier曲線の軌跡として実現できる(図\ref{Fig403}).
 これは簡単な計算で確かめられる.
 \begin{figure}[H]
     \begin{minipage}{0.5\hsize}
@@ -1736,7 +1755,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
         \begin{center}
             \includegraphics[page=13,clip,width=80mm]{figA.pdf}
         \end{center}
-        \caption{B\'{e}zierB曲線の軌跡としてのB\'{e}zier曲面}
+        \caption{B\'{e}zier曲線の軌跡としてのB\'{e}zier曲面}
         \label{Fig403}
     \end{minipage}
 \end{figure}
@@ -1803,17 +1822,17 @@ B-splineは先に説明した通りである.
 
 \newpage
 表紙の図は$d=\tilde{d}=3, p^1=1, p^2=2, p^3=2, \bm{k}^1=(0,0,1,1), \bm{k}^2=(0,0,0,1,1,2,2,3,3,4,4,4), \bm{k}^3=(0,0,0,1,1,2,2,3,3,4,4,4)$とした例である.
-制御点の配置は図の通りであり, 重みは紙面の都合で一部のみ書き込んだ. (図\ref{Fig502})
+制御点の配置は図の通りであり, 重みは紙面の都合で一部のみ書き込んだ(図\ref{Fig502}).
 \begin{figure}[H]
 	\centering
     \includegraphics[page=5,clip,width=130mm]{figA.pdf}
     \caption{3次元NURBS多様体の例}
 	\label{Fig502}
 \end{figure}
-NURBS多様体は 有理化・区分化・多次元化 の拡張によってその柔軟性を獲得したが, これでもまだ複雑な形状には対応できない場合も多い.
-その場合は, 有限個のNURBS多様体を張り合わせて形状を構成する.
-この手法は多重パッチと呼ばれ, 次の図\ref{Fig503}はその概略図である.%
+NURBS多様体は 有理化・区分化・多次元化 の拡張によってその柔軟性を獲得したが, これでもまだ複雑な形状には対応できない場合も多い.%
 \footnote{連結な1次元多様体は$\setR$と$S^1$に分類でき, それぞれに対応するように定義\ref{Def300a}, \ref{Def300b}, \ref{Def300c}が構成できた. しかし2次元以上だと分類が複雑になるため, このような多重パッチが必要となる.}
+このような場合は有限個のNURBS多様体を張り合わせて複雑な形状を構成することが出来る.
+この手法は多重パッチと呼ばれ, 次の図\ref{Fig503}はその概略図である.
 貼り合わせ部での滑らかさも重要であるが, ここではこれ以上立ち入らない.
 \begin{figure}[H]
 	\centering
@@ -1825,7 +1844,7 @@ NURBS多様体は 有理化・区分化・多次元化 の拡張によってそ�
 \newpage
 
 \section{NURBS多様体の細分とT-spline}
-B\'{e}zier曲線では, 制御点を適切に配置すれば任意の$2$次B\'{e}zier曲線を$3$次B\'{e}zier曲線で表すことができる.
+B\'{e}zier曲線では, 制御点を適切に配置することによって任意の$2$次B\'{e}zier曲線を$3$次B\'{e}zier曲線で表すことができる(図\ref{Fig601}).
 \begin{figure}[H]
 	\centering
     \includegraphics[page=3,clip,width=90mm]{figA.pdf}
@@ -1834,24 +1853,24 @@ B\'{e}zier曲線では, 制御点を適切に配置すれば任意の$2$次B\'{e
 \end{figure}
 これは多項式空間の包含関係(定理\ref{Thm103})が本質的であって, 当然のように任意の$3$次B\'{e}zier曲線を$2$次B\'{e}zier曲線で表すことはできない.
 NURBS多様体でも区分多項式空間$\mathcal{P}[p,\bm{k}]$の包含関係によって制御点を増やすことが出来る.
-この操作は細分\footnote{細分と書いたが, 定着した日本語は無い. 英語ではrefinementと呼ばれる.}と呼ばれ, とくに定理\ref{Thm310}によるものが$h$-細分, 定理\ref{Thm311}によるものが$p$-細分である.
+この操作は細分\footnote{細分と書いたが, 定着した日本語は無い. 英語ではrefinementと呼ばれる.}と呼ばれ, とくに定理\ref{Thm310}によるものが$h$-細分, 定理\ref{Thm311}によるものが$p$-細分である(図\ref{Fig602}).
 \begin{figure}[H]
 	\centering
     \includegraphics[page=11,clip,width=150mm]{figA.pdf}
     \caption{NURBS多様体の細分の例}
 	\label{Fig602}
 \end{figure}
-細分前の基底関数, 制御点を$B_I, \bm{a}_I$, 細分後の基底関数, 制御点を$B_I', \bm{a}_I'$とする.
-細分後の制御点などを求めるには, 次が充たされることを考えれば良い.
+細分前の基底関数, 制御点を$B_{i^1\cdots i^d}, \bm{a}_{i^1\cdots i^d}$, 細分後の基底関数, 制御点を$B_{i^1\cdots i^d}', \bm{a}_{i^1\cdots i^d}'$とする.
+細分の前後で形状は変わらないから, 細分後の制御点などを求めるには次が充たされれば良い.
 \begin{align}
-    \sum_I B_I\bm{a}_I
-    =\sum_J B_J'\bm{a}_J'
+    \sum_{i^1\cdots i^d} B_{i^1\cdots i^d}\bm{a}_{i^1\cdots i^d}
+    =\sum_{j^1\cdots j^d} B_{j^1\cdots j^d}'\bm{a}_{j^1\cdots j^d}'
 \end{align}
 具体的に展開すれば
 \begin{align}
-    \sum_I B_I\bm{a}_I
+    \sum_{i^1\cdots i^d} B_{i^1\cdots i^d}\bm{a}_{i^1\cdots i^d}
     &=\sum_{i^1,\dots,i^d} \frac{B_{(i^1,p^1)}(t^1)\cdots B_{(i^d,p^d)}(t^d)w_{i^1\cdots i^d}}{\sum\limits_{j^1,\dots,j^d}B_{(j^1,p^1)}(t^1)\cdots B_{(j^d,p^d)}(t^d)w_{j^1\cdots j^d}}\bm{a}_{i^1\cdots i^d} \\
-    \sum_I B'_I\bm{a}'_I
+    \sum_{i^1\cdots i^d} B_{i^1\cdots i^d}'\bm{a}_{i^1\cdots i^d}'
     &=\sum_{i^1,\dots,i^d} \frac{B'_{(i^1,p^1)}(t^1)\cdots B'_{(i^d,p^d)}(t^d)w'_{i^1\cdots i^d}}{\sum\limits_{j^1,\dots,j^d}B'_{(j^1,p^1)}(t^1)\cdots B'_{(j^d,p^d)}(t^d)w'_{j^1\cdots j^d}}\bm{a}'_{i^1\cdots i^d}
 \end{align}
 であり, まずは分母の一致のために次を充たす$w'_I$を決定する.
@@ -1890,22 +1909,25 @@ NURBS多様体でも区分多項式空間$\mathcal{P}[p,\bm{k}]$の包含関係�
     \label{Eqn601}
     \kappa_i={\frac{n-i+1}{n+1}\cdot k_i+\frac{i}{n+1}\cdot k_{i+p+1}}
 \end{align}
-天下り的になってしまったが, 要するにこれは区間$\supp(B_{(i,p)})$を$n+1$等分してその点を順に選んでいるだけである.
-式\eqref{Eqn601}で決定した行列$B_{(i,p)}(\kappa_j)$が可逆になる事は次の定理\ref{Thm601}から保証される.
-\begin{screen}
-	\begin{thm}
-        \label{Thm601}
-		基底関数の各点での独立性
+天下り的になってしまったが要するにこれは区間$\supp(B_{(i,p)})$を$n+1$等分してその点を順に選んでいるだけである.
+これによって$\kappa_i$は狭義単調増加になってかつ$\supp(B_{(i,p)})$の内点に$\kappa_i$があるので行列$B_{(i,p)}(\kappa_j)$が可逆になるのである.
+% 式\eqref{Eqn601}によって決定した行列$B_{(i,p)}(\kappa_j)$が可逆になる事は次の定理\ref{Thm601}から保証される.
+% \begin{screen}
+% 	\begin{thm}
+%         \label{Thm601}
+% 		基底関数の各点での独立性
+%
+%         次数$p>0$, ノット列$\bm{k}=(k_1,\dots,k_l)$から生成されるB-spline基底関数を$B_i$とし, $n=\# \bm{k}-p-1$とおく.
+%         このとき, $\Pare{B_1(\kappa_a),\dots,B_n(\kappa_a)}, \Pare{B_1(\kappa_b),\dots,B_n(\kappa_b)}$は$\setR^n$上で線形独立.
+% 	\end{thm}
+% \end{screen}
+% \begin{proof}
+%     線形従属と仮定すれば, B-spline基底関数の1の分割の性質(定理\ref{Thm306})より$B_i(\kappa_a)=B_i(\kappa_b)$である.
+%     しかしこれは基底関数の極大点一意性(定理\ref{Thm313})に矛盾.
+%     よって$\Pare{B_1(\kappa_a),\dots,B_n(\kappa_a)}, \Pare{B_1(\kappa_b),\dots,B_n(\kappa_b)}$は$\setR^n$上で線形独立である.
+% \end{proof}
 
-        次数$p>0$, ノット列$\bm{k}=(k_1,\dots,k_l)$から生成されるB-spline基底関数を$B_i$とし, $n=\# \bm{k}-p-1$とおく.
-        このとき, $\Pare{B_1(\kappa_a),\dots,B_n(\kappa_a)}, \Pare{B_1(\kappa_b),\dots,B_n(\kappa_b)}$は$\setR^n$上で線形独立.
-	\end{thm}
-\end{screen}
-\begin{proof}
-    線形従属と仮定すれば, B-spline基底関数の1の分割の性質(定理\ref{Thm306})より$B_i(\kappa_a)=B_i(\kappa_b)$である.
-    しかしこれは基底関数の極大点一意性(定理\ref{Thm313})に矛盾.
-    よって$\Pare{B_1(\kappa_a),\dots,B_n(\kappa_a)}, \Pare{B_1(\kappa_b),\dots,B_n(\kappa_b)}$は$\setR^n$上で線形独立である.
-\end{proof}
+\newpage
 
 さて, NURBSの$h$-細分は局所的に形状を変化させるための操作である.
 つまり, ノット列の集まっている所では制御点の数が増え, その付近での変形の自由度が増えることを利用するのである.
@@ -1925,7 +1947,7 @@ $\Omega_{22}$の上でのノットの密度を上げたかったのだが, $\Ome
     \caption{T-splineの座標空間の模式図}
 	\label{Fig604}
 \end{figure}
-つまり, $\Omega_{22}\subset\supp(B_I)$を充たすような基底関数$B_I$に関する制御点$\bm{a}_I$だけを細分後に動かすこととし, それ以外は動かさないように決めておくのである.
+つまり, $\Omega_{22}\subset\supp(B_{i^1\cdots i^d})$を充たすような基底関数$B_{i^1\cdots i^d}$に関する制御点$\bm{a}_{i^1\cdots i^d}$だけを細分後に動かすこととし, それ以外は動かさないように決めておくのである.
 このようにして$\Omega_{12},\Omega_{22}$上でのT-splineのパラメータ付けは細分後に変化しないようにでき, この領域に対応する制御点は細分前のものとする事で, 制御点を削減することが出来るのである.
 T-splineとNURBSの差分は単にデータの取り扱い方にあって, そこには数学的なギャップは殆ど存在しない.%
 \footnote{更に言えば, T-splineで表現可能な形状はNURBSでも表現可能であって, 逆にNURBSで表現可能な形状はT-splineでも表現可能である.}
