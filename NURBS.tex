@@ -428,7 +428,7 @@ B\'ezier曲線について次の定理が成り立つ.
 	\caption{3次B\'ezier曲線(赤線)\protect\footnotemark}
 	\label{Fig103}
 \end{figure}
-\footnotetext{\url{https://www.desmos.com/calculator/rnbuksh1w3}}
+\footnotetext{\url{https://www.desmos.com/calculator/a8kgvjkpkx}}
 式(\ref{Eqn102})と式(\ref{Eqn105})が等価であることから, B\'ezier曲線の定義を式(\ref{Eqn105})とする流儀もある.
 
 以降のための準備として, 次に多項式空間を用意する.
@@ -639,7 +639,7 @@ B\'ezier曲線では, 楕円や双曲線を表現できないという問題が�
 	\begin{defn}
 		有理曲線
 
-        $n$個の制御点点$\bm{a}_1, \dots, \bm{a}_n\in\mathbb{R}^{\tilde{d}}$と有理基底関数$B_i$が与えられれば, 有理曲線は次式で定義される.
+        $n$個の制御点$\bm{a}_1, \dots, \bm{a}_n\in\mathbb{R}^{\tilde{d}}$と有理基底関数$B_i$が与えられれば, 有理曲線は次式で定義される.
 		\begin{align}
 			\bm{p}(t)=\sum_i B_i(t) \bm{a}_i
 		\end{align}
@@ -740,8 +740,8 @@ $\tilde{d}=2$では可視化するために必要な空間が3次元だから理
 \end{proof}
 \newpage
 この定理の例として$5$次有理Bernstein基底関数を考えれば, 次の図\ref{Fig212}のようになる.
-ここで, 簡単のために$w_0=w_1=w_3=w_4=w_5=1$とし, $w_2$をパラメータとした.
-図中の色付きの曲線が有理Bernstein基底関数$B_2$である.
+ここで, 簡単のために$w_1=w_2=w_4=w_5=w_6=1$とし, $w_3$をパラメータとした.
+図中の色付きの曲線が有理Bernstein基底関数$B_3$である.
 \addtocounter{footnote}{-1}
 \begin{figure}[H]
 	\centering
@@ -1325,7 +1325,7 @@ B-spline曲線の定義は, 1の分割の性質のために, 次の3通りの流
 \end{figure}
 \footnotetext{\url{https://www.desmos.com/calculator/meyqjb90bw}}
 図\ref{Fig300a}右側の破線部は区間$[k_{1},k_{p+1}], [k_{l-p},k_{l}]$に対応する部分である.
-これらの区間では1の分割が充たされないためにAffine不変性(定理\ref{affine})を充たさないし, 凸包性(定理\ref{convex})を充たすとも限らない.
+これらの区間では1の分割が充たされないためにアフィン不変性(定理\ref{affine})を充たさないし, 凸包性(定理\ref{convex})を充たすとも限らない.
 
 % 既に見たように, 区間$[k_{p+1},k_{l-p}]$の外では1の分割が充たされていない.
 % 無理やり区間$[k_{1},k_{l}]$で定義すると次の図\ref{Fig309}のようになる.
